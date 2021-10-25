@@ -9,6 +9,7 @@ describe("POST /sign-in", () => {
         const email = "test@email.com";
         const password = bcrypt.hashSync("1234", 10);
         await connection.query(`DELETE FROM users;`);
+        await connection.query(`DELETE FROM sessions;`);
         await connection.query(`
         INSERT INTO users (
             name,
