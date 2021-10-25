@@ -28,7 +28,9 @@ export default async function signIn(req, res) {
             delete user.password;
             const login = {
                 token,
-                user
+                data: {
+                    ...user
+                }
             };
 
             res.status(200).send(login);
