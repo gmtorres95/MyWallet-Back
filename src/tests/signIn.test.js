@@ -3,22 +3,25 @@ import bcrypt from "bcrypt";
 import app from "../app.js";
 import connection from "../database.js";
 
-describe("POST /sign-in", () => {
-    beforeAll(async () => {
-        const name = "Test";
-        const email = "test@email.com";
-        const password = bcrypt.hashSync("1234", 10);
-        await connection.query(`DELETE FROM users;`);
-        await connection.query(`DELETE FROM sessions;`);
-        await connection.query(`
-        INSERT INTO users (
-            name,
-            email,
-            password
-        ) VALUES ($1, $2, $3);
-        `, [name, email, password]);
-    })
+beforeAll(async () => {
+    const name = "Test";
+    const email = "test@email.com";
+    const password = bcrypt.hashSync("1234", 10);
+    await connection.query(`
+    INSERT INTO users (
+        name,
+        email,
+        password
+    ) VALUES ($1, $2, $3);
+    `, [name, email, password]);
+})
 
+afterAll(async () => {
+    await connection.query(`DELETE FROM users;`);
+    await connection.query(`DELETE FROM sessions;`);
+})
+
+describe("POST /sign-in", () => {
     it("Returns 200 for valid params", async () => {
         const body = {
             email: "test@email.com",

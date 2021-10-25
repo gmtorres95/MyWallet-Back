@@ -2,11 +2,11 @@ import supertest from "supertest";
 import app from "../app.js";
 import connection from "../database.js";
 
-describe("POST /sign-up", () => {
-    beforeAll(async () => {
-        await connection.query(`DELETE FROM users;`);
-    })
+afterAll(async () => {
+    await connection.query(`DELETE FROM users;`);
+})
 
+describe("POST /sign-up", () => {
     it("Returns 201 for valid params", async () => {
         const body = {
             name: "Test1",
