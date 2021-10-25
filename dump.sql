@@ -28,7 +28,7 @@ CREATE TABLE public.entries (
     id integer NOT NULL,
     date date,
     description text,
-    value integer,
+    value numeric(11,2),
     income boolean,
     "userId" integer
 );
@@ -178,21 +178,21 @@ COPY public.users (id, name, email, password) FROM stdin;
 -- Name: entries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.entries_id_seq', 15, true);
+SELECT pg_catalog.setval('public.entries_id_seq', 23, true);
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 66, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 116, true);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 140, true);
+SELECT pg_catalog.setval('public.users_id_seq', 156, true);
 
 
 --
