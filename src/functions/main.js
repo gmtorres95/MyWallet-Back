@@ -27,7 +27,7 @@ async function saveToMain(req, res) {
         value,
         income
     } = req.body;
-    if(!income || !value) return res.sendStatus(400);
+    if(income === undefined || !value) return res.sendStatus(400);
 
     try {
         const user = await connection.query(`SELECT * FROM sessions WHERE token = $1;`, [token]);
