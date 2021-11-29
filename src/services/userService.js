@@ -16,6 +16,9 @@ export async function signUp(name, email, password) {
 export async function signIn(email, password) {
   const user = await userRepository.fetchUser(email);
   if (!user || !bcrypt.compareSync(password, user.password)) return false;
+
+  const session = await userRepository.fetchSession(user.id);
+  if (session) return session;
   
   const token = uuid();
   await userRepository.createSession(token, user.id);

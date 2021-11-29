@@ -21,3 +21,22 @@ export async function createSession(token, userId) {
     [token, userId]
   );
 }
+
+export async function fetchSession(userId) {
+  const result = await connection.query(
+    `
+      SELECT
+        sessions.token,
+        json_build_object(
+          'id', users.id,
+          'name', users.name,
+          'email', users.email
+        ) AS data
+      FROM sessions
+      JOIN users
+        ON sessions.user_id = users.id
+      WHERE users.id = $1
+    `, [userId]
+  );
+  return result.rows[0];
+}
