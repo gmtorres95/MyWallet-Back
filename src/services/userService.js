@@ -1,11 +1,11 @@
-import bcrypt from "bcrypt";
-import { v4 as uuid } from "uuid";
+import bcrypt from 'bcrypt';
+import { v4 as uuid } from 'uuid';
 
-import * as userRepository from "../repositories/userRepository.js";
+import * as userRepository from '../repositories/userRepository.js';
 
 export async function signUp({ name, email, password }) {
   const hash = bcrypt.hashSync(password, 10);
-  
+
   const user = await userRepository.fetchUser(email);
   if (user) return false;
 
@@ -19,7 +19,7 @@ export async function signIn({ email, password }) {
 
   const session = await userRepository.fetchSession(user.id);
   if (session) return session;
-  
+
   const token = uuid();
   await userRepository.createSession(token, user.id);
 

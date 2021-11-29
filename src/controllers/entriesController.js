@@ -1,5 +1,5 @@
-import * as entriesService from "../services/entriesService.js";
-import * as validate from "../validations/validations.js";
+import * as entriesService from '../services/entriesService.js';
+import * as validate from '../validations/validations.js';
 
 export async function getEntries(req, res) {
   try {

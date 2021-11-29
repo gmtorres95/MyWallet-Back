@@ -1,4 +1,4 @@
-import * as schema from "./schemas.js";
+import * as schema from './schemas.js';
 
 export function validateNewUser(user) {
   const joiValidation = schema.newUser.validate(user);
