@@ -26,11 +26,11 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.entries (
     id integer NOT NULL,
-    date date,
-    description text,
-    value numeric(11,2),
-    income boolean,
-    "userId" integer
+    date timestamp without time zone DEFAULT '2021-11-29 07:02:50.140993'::timestamp without time zone NOT NULL,
+    description character varying(255),
+    value numeric(11,2) NOT NULL,
+    income boolean DEFAULT true NOT NULL,
+    user_id integer NOT NULL
 );
 
 
@@ -64,8 +64,8 @@ ALTER SEQUENCE public.entries_id_seq OWNED BY public.entries.id;
 
 CREATE TABLE public.sessions (
     id integer NOT NULL,
-    token text,
-    "userId" integer
+    token character varying(36) NOT NULL,
+    user_id integer NOT NULL
 );
 
 
@@ -99,9 +99,9 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 CREATE TABLE public.users (
     id integer NOT NULL,
-    name text,
-    email text,
-    password text
+    name character varying(20) NOT NULL,
+    email character varying(255) NOT NULL,
+    password character varying(255) NOT NULL
 );
 
 
@@ -154,7 +154,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: entries; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.entries (id, date, description, value, income, "userId") FROM stdin;
+COPY public.entries (id, date, description, value, income, user_id) FROM stdin;
 \.
 
 
@@ -162,7 +162,7 @@ COPY public.entries (id, date, description, value, income, "userId") FROM stdin;
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sessions (id, token, "userId") FROM stdin;
+COPY public.sessions (id, token, user_id) FROM stdin;
 \.
 
 
@@ -178,21 +178,77 @@ COPY public.users (id, name, email, password) FROM stdin;
 -- Name: entries_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.entries_id_seq', 23, true);
+SELECT pg_catalog.setval('public.entries_id_seq', 1, false);
 
 
 --
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 116, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 1, false);
 
 
 --
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 156, true);
+SELECT pg_catalog.setval('public.users_id_seq', 1, false);
+
+
+--
+-- Name: entries entries_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entries
+    ADD CONSTRAINT entries_pk PRIMARY KEY (id);
+
+
+--
+-- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT sessions_pk PRIMARY KEY (id);
+
+
+--
+-- Name: sessions sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT sessions_token_key UNIQUE (token);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pk PRIMARY KEY (id);
+
+
+--
+-- Name: entries entries_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.entries
+    ADD CONSTRAINT entries_fk0 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
+-- Name: sessions sessions_fk0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sessions
+    ADD CONSTRAINT sessions_fk0 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
