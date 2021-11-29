@@ -6,9 +6,8 @@ export async function getEntries(req, res) {
   try {
     const entries = await entriesService.fetchEntries(userId);
 
-    res.status(200).send(entries);
+    res.send(entries);
   } catch (err) {
-    console.log(err);
     res.sendStatus(500);
   }
 }
@@ -23,7 +22,18 @@ export async function createEntry(req, res) {
 
     res.sendStatus(201);
   } catch (err) {
-    console.log(err);
+    res.sendStatus(500);
+  }
+}
+
+export async function getEntriesSum(req, res) {
+  const { userId } = res.locals;
+
+  try {
+    const total = await entriesService.calculateSum(userId);
+
+    res.send(total);
+  } catch (err) {
     res.sendStatus(500);
   }
 }

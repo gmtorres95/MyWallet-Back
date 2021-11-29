@@ -10,7 +10,6 @@ export async function signUp(req, res) {
 
     res.sendStatus(201);
   } catch (err) {
-    console.log(err);
     res.sendStatus(500);
   }
 }
@@ -23,9 +22,8 @@ export async function signIn(req, res) {
     const result = await  userService.signIn(email, password);
     if (!result) return res.status(401).send("Wrong email or password");
 
-    res.status(200).send(result);
+    res.send(result);
   } catch (err) {
-    console.log(err);
     res.sendStatus(500);
   }
 }

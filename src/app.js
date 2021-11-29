@@ -14,5 +14,6 @@ app.post("/sign-up", userController.signUp);
 app.post("/sign-in", userController.signIn);
 app.get("/entries", entriesController.getEntries);
 app.post("/entries", entriesController.createEntry);
+app.get("/entries/total", entriesController.getEntriesSum);
 
 export default app;
