@@ -19,12 +19,6 @@ export const newUser = joi.object({
 });
 
 export const user = joi.object({
-  name: joi
-    .string()
-    .min(3)
-    .max(15)
-    .pattern(/[^0-9.,"?!;:#$%&()*+-/<>=@[\\\]^_{}|~]+/)
-    .required(),
   email: joi
     .string()
     .pattern(/\b[\w.-]+@[\w.-]+\.\w{2,4}\b/i)
