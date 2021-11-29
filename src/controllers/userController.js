@@ -1,12 +1,13 @@
 import * as userService from "../services/userService.js";
+import * as validate from "../validations/validations.js";
 
 export async function signUp(req, res) {
-  const { name, email, password } = req.body;
-  if (!name || !email || !password || password.length < 4) return res.sendStatus(400);
-
   try {
-    const result = await userService.signUp(name, email, password);
-    if (!result) return res.status(409).send("This email is already in use");
+    const isInvalid = validate.validateNewUser(req.body);
+    if (isInvalid) return res.sendStatus(400);
+
+    const result = await userService.signUp(req.body);
+    if (!result) return res.status(409).send("Email already in use");
 
     res.sendStatus(201);
   } catch (err) {
@@ -15,11 +16,11 @@ export async function signUp(req, res) {
 }
 
 export async function signIn(req, res) {
-  const { email, password } = req.body;
-  if (!email || !password || password.length < 4) return res.sendStatus(400);
-
   try {
-    const result = await  userService.signIn(email, password);
+    const isInvalid = validate.validateUser(req.body);
+    if (isInvalid) return res.sendStatus(400);
+
+    const result = await  userService.signIn(req.body);
     if (!result) return res.status(401).send("Wrong email or password");
 
     res.send(result);

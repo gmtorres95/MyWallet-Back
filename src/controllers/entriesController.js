@@ -1,11 +1,9 @@
 import * as entriesService from "../services/entriesService.js";
+import * as validate from "../validations/validations.js";
 
 export async function getEntries(req, res) {
-  const { userId } = res.locals;
-
   try {
-    const entries = await entriesService.fetchEntries(userId);
-
+    const entries = await entriesService.fetchEntries(res.locals.userId);
     res.send(entries);
   } catch (err) {
     res.sendStatus(500);
@@ -13,13 +11,11 @@ export async function getEntries(req, res) {
 }
 
 export async function createEntry(req, res) {
-  const { userId } = res.locals;
-  const { description, value, income } = req.body;
-  if (income === undefined || !value) return res.sendStatus(400);
-
   try {
-    await entriesService.createEntry(description, value, income, userId);
+    const isInvalid = validate.validateNewEntry(req.body);
+    if (isInvalid) return res.sendStatus(400);
 
+    await entriesService.createEntry(req.body, res.locals.userId);
     res.sendStatus(201);
   } catch (err) {
     res.sendStatus(500);
@@ -27,11 +23,8 @@ export async function createEntry(req, res) {
 }
 
 export async function getEntriesSum(req, res) {
-  const { userId } = res.locals;
-
   try {
-    const total = await entriesService.calculateSum(userId);
-
+    const total = await entriesService.calculateSum(res.locals.userId);
     res.send(total);
   } catch (err) {
     res.sendStatus(500);
