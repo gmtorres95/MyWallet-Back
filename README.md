@@ -33,7 +33,3 @@ Use the .env.example file
 ```bash
 $ npm run start
 ```
-
-### Database
-
-You can create your own database using the dump.sql file
