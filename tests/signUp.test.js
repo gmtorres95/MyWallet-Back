@@ -1,6 +1,6 @@
 import supertest from "supertest";
-import app from "../app.js";
-import connection from "../database.js";
+import app from "../src/app.js";
+import connection from "../src/database.js";
 
 afterAll(async () => {
     await connection.query(`DELETE FROM users;`);
