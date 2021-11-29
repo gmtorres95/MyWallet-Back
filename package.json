@@ -5,21 +5,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node src/server.js",
+    "start:dev": "NODE_ENV=dev nodemon src/server.js",
+    "test": "NODE_ENV=test npx jest -i",
+    "test:watch": "NODE_ENV=test npx jest -i --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.2",
+    "pg": "^8.7.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "babel-jest": "^27.3.1",
-    "bcrypt": "^5.0.1",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "faker": "^5.5.3",
     "jest": "^27.3.1",
-    "pg": "^8.7.1",
-    "supertest": "^6.1.6",
-    "uuid": "^8.3.2"
+    "supertest": "^6.1.6"
   }
 }
