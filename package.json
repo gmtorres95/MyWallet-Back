@@ -7,8 +7,8 @@
   "scripts": {
     "start": "NODE_ENV=production NODE_TLS_REJECT_UNAUTHORIZED=0 node src/server.js",
     "start:dev": "NODE_ENV=dev nodemon src/server.js",
-    "test": "NODE_ENV=test npx jest",
-    "test:watch": "NODE_ENV=test npx jest --watch"
+    "test": "NODE_ENV=test npx jest -i",
+    "test:watch": "NODE_ENV=test npx jest -i --watch"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "faker": "^5.5.3",
     "jest": "^27.3.1",
     "joi": "^17.4.2",
     "pg": "^8.7.1",
