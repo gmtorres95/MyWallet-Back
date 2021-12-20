@@ -18,7 +18,7 @@ Check the front-end of this application in production [here](https://my-wallet-f
 
 ```bash
 # Clone this repository
-$ git clone https://https://github.com/gmtorres95/MyWallet-Back
+$ git clone https://github.com/gmtorres95/MyWallet-Back
 
 # Install the dependencies
 $ npm i
