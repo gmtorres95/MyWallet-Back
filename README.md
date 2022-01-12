@@ -3,7 +3,7 @@
 <img src="https://github.com/gmtorres95/MyWallet-Front/blob/main/public/favicon.png" height="192px" />
 
 Your definitive solution for financial control!\
-Check the front-end of this application in production [here](https://my-wallet-front-i0ji62hu1-gmtorres95.vercel.app/)  
+Check the front-end of this application [here](https://github.com/gmtorres95/MyWallet-Front)  
 Link of the API: https://p14-mywallet-back.herokuapp.com/
 
 ## Technologies
