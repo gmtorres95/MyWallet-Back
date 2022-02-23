@@ -1,6 +1,4 @@
-# MyWallet (back-end)
-
-<img src="https://github.com/gmtorres95/MyWallet-Front/blob/main/public/favicon.png" height="192px" />
+# <img src="https://github.com/gmtorres95/MyWallet-Front/blob/main/public/favicon.png" height="24px" /> MyWallet (back-end)
 
 Your definitive solution for financial control!\
 Check the front-end of this application [here](https://github.com/gmtorres95/MyWallet-Front)  
